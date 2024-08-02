@@ -52,6 +52,7 @@ main h1 {
 
 .book div:first-child {
   font-weight: bold;
+  margin-top: 10px;
 }
 
 .book div {

@@ -1,5 +1,6 @@
 const myLibray = [];
 
+// Book contructor
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -14,6 +15,7 @@ function Book(title, author, pages, read) {
   };
 }
 
+// Displays any and all books already in the array
 function displayLibrary() {
   myLibray.forEach((book) => {
     const libraryContainer = document.querySelector(".library");
@@ -61,9 +63,35 @@ function displayLibrary() {
   });
 }
 
+// Initial data
 myLibray.push(new Book("Financial Peace Revisited", "Dave Ramsey", 319, "No"));
 myLibray.push(
   new Book("The 48 Laws of Power", "Robert Greene", 452, "In Progress")
 );
 
+// Tells the program to display the book as soon as the page is loaded
 window.onload = displayLibrary();
+
+const deleteButtons = document.querySelectorAll(
+  ".material-symbols-underlined.delete"
+);
+
+deleteButtons.forEach((button) => {
+  button.addEventListener("click", () => {});
+});
+
+const checkButtons = document.querySelectorAll(
+  ".material-symbols-underlined.check"
+);
+
+checkButtons.forEach((button) => {
+  button.addEventListener("click", () => {});
+});
+
+const cachedButtons = document.querySelectorAll(
+  ".material-symbols-underlined.cached"
+);
+
+cachedButtons.forEach((button) => {
+  button.addEventListener("click", () => {});
+});
