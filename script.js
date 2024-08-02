@@ -73,5 +73,8 @@ myLibray.push(
   new Book("The 48 Laws of Power", "Robert Greene", 452, "In Progress")
 );
 
-// Tells the program to display the book as soon as the page is loaded
+// Tells the program to display the books in the array as soon as the page is loaded
 window.onload = displayLibrary();
+
+const dialog = document.querySelector("dialog");
+dialog.showModal();
