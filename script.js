@@ -71,27 +71,3 @@ myLibray.push(
 
 // Tells the program to display the book as soon as the page is loaded
 window.onload = displayLibrary();
-
-const deleteButtons = document.querySelectorAll(
-  ".material-symbols-underlined.delete"
-);
-
-deleteButtons.forEach((button) => {
-  button.addEventListener("click", () => {});
-});
-
-const checkButtons = document.querySelectorAll(
-  ".material-symbols-underlined.check"
-);
-
-checkButtons.forEach((button) => {
-  button.addEventListener("click", () => {});
-});
-
-const cachedButtons = document.querySelectorAll(
-  ".material-symbols-underlined.cached"
-);
-
-cachedButtons.forEach((button) => {
-  button.addEventListener("click", () => {});
-});
