@@ -29,6 +29,7 @@ function displayLibrary() {
     const buttonsCheck = document.createElement("span");
     const buttonsCached = document.createElement("span");
     const buttonsDelete = document.createElement("span");
+    const buttonsClose = document.createElement("span");
 
     bookContainer.classList.add("book");
     bookTitle.classList.add("title");
@@ -39,6 +40,7 @@ function displayLibrary() {
     buttonsCheck.classList.add("material-symbols-outlined", "check");
     buttonsCached.classList.add("material-symbols-outlined", "cached");
     buttonsDelete.classList.add("material-symbols-outlined", "delete");
+    buttonsClose.classList.add("material-symbols-outlined", "close");
 
     bookTitle.textContent = book.title;
     bookAuthor.textContent = "by " + book.author;
@@ -47,6 +49,7 @@ function displayLibrary() {
     buttonsCheck.textContent = "check";
     buttonsCached.textContent = "cached";
     buttonsDelete.textContent = "delete";
+    buttonsClose.textContent = "close";
 
     bookContainer.appendChild(bookTitle);
     bookContainer.appendChild(bookAuthor);
@@ -55,6 +58,7 @@ function displayLibrary() {
 
     bookButtons.appendChild(buttonsCheck);
     bookButtons.appendChild(buttonsCached);
+    bookButtons.appendChild(buttonsClose);
     bookButtons.appendChild(buttonsDelete);
 
     bookContainer.appendChild(bookButtons);

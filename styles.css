@@ -72,5 +72,9 @@ main h1 {
 }
 
 .cached:hover {
+  color: lightskyblue;
+}
+
+.close:hover {
   color: orange;
 }
