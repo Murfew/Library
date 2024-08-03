@@ -82,6 +82,7 @@ function addNewBookToDOM(book, index) {
 function displayLibrary() {
   myLibray.forEach((book) => {
     addNewBookToDOM(book, myLibray.indexOf(book));
+    attachButtons();
   });
 }
 
@@ -118,7 +119,10 @@ dialog.addEventListener("close", () => {
     );
 
     myLibray.push(newBook);
-    addNewBookToDOM(newBook, myLibray.indexOf(book));
+    addNewBookToDOM(newBook, myLibray.indexOf(newBook));
+    attachButtons();
+
+    /* Add button event listeners */
   }
 });
 
@@ -131,38 +135,40 @@ cancelButton.addEventListener("click", () => {
   dialog.close();
 });
 
-const deleteButtons = document.querySelectorAll(".delete");
-deleteButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const bookContainer = button.parentNode.parentNode;
-    delete myLibray[bookContainer.dataset.index];
-    bookContainer.parentNode.removeChild(bookContainer);
+function attachButtons() {
+  const deleteButtons = document.querySelectorAll(".delete");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const bookContainer = button.parentNode.parentNode;
+      delete myLibray[bookContainer.dataset.index];
+      bookContainer.parentNode.removeChild(bookContainer);
+    });
   });
-});
 
-const readButtons = document.querySelectorAll(".check");
-readButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const bookContainer = button.parentNode.parentNode;
-    myLibray[bookContainer.dataset.index].setRead();
-    button.parentNode.previousSibling.textContent = "Read: Yes";
+  const readButtons = document.querySelectorAll(".check");
+  readButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const bookContainer = button.parentNode.parentNode;
+      myLibray[bookContainer.dataset.index].setRead();
+      button.parentNode.previousSibling.textContent = "Read: Yes";
+    });
   });
-});
 
-const notReadButtons = document.querySelectorAll(".close");
-notReadButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const bookContainer = button.parentNode.parentNode;
-    myLibray[bookContainer.dataset.index].setNotRead();
-    button.parentNode.previousSibling.textContent = "Read: No";
+  const notReadButtons = document.querySelectorAll(".close");
+  notReadButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const bookContainer = button.parentNode.parentNode;
+      myLibray[bookContainer.dataset.index].setNotRead();
+      button.parentNode.previousSibling.textContent = "Read: No";
+    });
   });
-});
 
-const inProgressButtons = document.querySelectorAll(".cached");
-inProgressButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const bookContainer = button.parentNode.parentNode;
-    myLibray[bookContainer.dataset.index].setInProgress();
-    button.parentNode.previousSibling.textContent = "Read: In Progress";
+  const inProgressButtons = document.querySelectorAll(".cached");
+  inProgressButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const bookContainer = button.parentNode.parentNode;
+      myLibray[bookContainer.dataset.index].setInProgress();
+      button.parentNode.previousSibling.textContent = "Read: In Progress";
+    });
   });
-});
+}
