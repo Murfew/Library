@@ -84,8 +84,6 @@ const dialog = document.querySelector("dialog");
 const addBookButton = document.querySelector(".add-book");
 const confirmButton = document.querySelector(".confirm-button");
 const cancelButton = document.querySelector(".cancel-button");
-const newBookDetails = document.querySelectorAll("dialog input");
-const newBookRead = document.querySelector("dialog select");
 
 addBookButton.addEventListener("click", () => {
   dialog.showModal();
@@ -93,6 +91,18 @@ addBookButton.addEventListener("click", () => {
 
 dialog.addEventListener("close", () => {
   if (dialog.returnValue === "default") {
+    const newBookTitle = document.getElementById("title").value;
+    const newBookAuthor = document.getElementById("author").value;
+    const newBookPages = document.getElementById("pages").value;
+    const newBookRead = document.getElementById("read").value;
+
+    let newBook = new Book(
+      newBookTitle,
+      newBookAuthor,
+      newBookPages,
+      newBookRead
+    );
+
     myLibray.push(newBook);
     addNewBookToDOM(newBook);
   }
