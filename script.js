@@ -15,7 +15,7 @@ function Book(title, author, pages, read) {
   };
 }
 
-function addNewBookToDOM(book) {
+function addNewBookToDOM(book, index) {
   const libraryContainer = document.querySelector(".library");
 
   const bookContainer = document.createElement("div");
@@ -39,6 +39,8 @@ function addNewBookToDOM(book) {
   buttonsCached.classList.add("material-symbols-outlined", "cached");
   buttonsDelete.classList.add("material-symbols-outlined", "delete");
   buttonsClose.classList.add("material-symbols-outlined", "close");
+
+  bookContainer.dataset.index = index;
 
   bookTitle.textContent = book.title;
   bookAuthor.textContent = "by " + book.author;
@@ -67,7 +69,7 @@ function addNewBookToDOM(book) {
 // Displays any and all books already in the array
 function displayLibrary() {
   myLibray.forEach((book) => {
-    addNewBookToDOM(book);
+    addNewBookToDOM(book, myLibray.indexOf(book));
   });
 }
 
@@ -104,7 +106,7 @@ dialog.addEventListener("close", () => {
     );
 
     myLibray.push(newBook);
-    addNewBookToDOM(newBook);
+    addNewBookToDOM(newBook, myLibray.indexOf(book));
   }
 });
 
@@ -115,4 +117,13 @@ confirmButton.addEventListener("click", (event) => {
 
 cancelButton.addEventListener("click", () => {
   dialog.close();
+});
+
+const deleteButtons = document.querySelectorAll(".delete");
+deleteButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const buttonBookContainer = button.parentNode.parentNode;
+    myLibray.splice(buttonBookContainer.dataset.index, 1);
+    buttonBookContainer.parentNode.removeChild(buttonBookContainer);
+  });
 });
