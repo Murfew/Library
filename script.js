@@ -1,31 +1,23 @@
 const myLibray = [];
 
 // Book contructor
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = () => {
-    if (read === "Yes") {
-      return `${this.title} by ${this.author}, ${this.pages}, read`;
-    } else {
-      return `${this.title} by ${this.author}, ${this.pages}, not read yet`;
-    }
-  };
+class Book {
+  title;
+  author;
+  pages;
+  read;
+
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  set read(status) {
+    this.read = status;
+  }
 }
-
-Book.prototype.setInProgress = function () {
-  this.read = "In Progress";
-};
-
-Book.prototype.setRead = function () {
-  this.read = "Yes";
-};
-
-Book.prototype.setNotRead = function () {
-  this.read = "No";
-};
 
 function addNewBookToDOM(book, index) {
   const libraryContainer = document.querySelector(".library");
@@ -149,7 +141,7 @@ function attachButtons() {
   readButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      myLibray[bookContainer.dataset.index].setRead();
+      myLibray[bookContainer.dataset.index].read = "Yes";
       button.parentNode.previousSibling.textContent = "Read: Yes";
     });
   });
@@ -158,7 +150,7 @@ function attachButtons() {
   notReadButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      myLibray[bookContainer.dataset.index].setNotRead();
+      myLibray[bookContainer.dataset.index].read = "No";
       button.parentNode.previousSibling.textContent = "Read: No";
     });
   });
@@ -167,7 +159,7 @@ function attachButtons() {
   inProgressButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      myLibray[bookContainer.dataset.index].setInProgress();
+      myLibray[bookContainer.dataset.index].read = "In Progress";
       button.parentNode.previousSibling.textContent = "Read: In Progress";
     });
   });
