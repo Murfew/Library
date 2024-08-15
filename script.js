@@ -1,6 +1,6 @@
-const myLibray = [];
+const myLibrary = [];
 
-// Book contructor
+// Book constructor
 class Book {
   title;
   author;
@@ -72,15 +72,15 @@ function addNewBookToDOM(book, index) {
 
 // Displays any and all books already in the array
 function displayLibrary() {
-  myLibray.forEach((book) => {
-    addNewBookToDOM(book, myLibray.indexOf(book));
+  myLibrary.forEach((book) => {
+    addNewBookToDOM(book, myLibrary.indexOf(book));
     attachButtons();
   });
 }
 
 // Initial data
-myLibray.push(new Book("Financial Peace Revisited", "Dave Ramsey", 319, "No"));
-myLibray.push(
+myLibrary.push(new Book("Financial Peace Revisited", "Dave Ramsey", 319, "No"));
+myLibrary.push(
   new Book("The 48 Laws of Power", "Robert Greene", 452, "In Progress")
 );
 
@@ -91,13 +91,14 @@ const dialog = document.querySelector("dialog");
 const addBookButton = document.querySelector(".add-book");
 const confirmButton = document.querySelector(".confirm-button");
 const cancelButton = document.querySelector(".cancel-button");
+const form = document.querySelector("form");
 
 addBookButton.addEventListener("click", () => {
   dialog.showModal();
 });
 
 dialog.addEventListener("close", () => {
-  if (dialog.returnValue === "default") {
+  if (dialog.returnValue === "submit") {
     const newBookTitle = document.getElementById("title").value;
     const newBookAuthor = document.getElementById("author").value;
     const newBookPages = document.getElementById("pages").value;
@@ -110,21 +111,24 @@ dialog.addEventListener("close", () => {
       newBookRead
     );
 
-    myLibray.push(newBook);
-    addNewBookToDOM(newBook, myLibray.indexOf(newBook));
+    myLibrary.push(newBook);
+    addNewBookToDOM(newBook, myLibrary.indexOf(newBook));
     attachButtons();
 
-    /* Add button event listeners */
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("pages").value = "";
+    document.getElementById("read").value = "No";
   }
 });
 
-confirmButton.addEventListener("click", (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-  dialog.close(confirmButton.value);
+  dialog.close("submit");
 });
 
 cancelButton.addEventListener("click", () => {
-  dialog.close();
+  dialog.close("cancel");
 });
 
 function attachButtons() {
@@ -132,7 +136,7 @@ function attachButtons() {
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      delete myLibray[bookContainer.dataset.index];
+      delete [bookContainer.dataset.index];
       bookContainer.parentNode.removeChild(bookContainer);
     });
   });
@@ -141,7 +145,7 @@ function attachButtons() {
   readButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      myLibray[bookContainer.dataset.index].read = "Yes";
+      myLibrary[bookContainer.dataset.index].read = "Yes";
       button.parentNode.previousSibling.textContent = "Read: Yes";
     });
   });
@@ -150,7 +154,7 @@ function attachButtons() {
   notReadButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      myLibray[bookContainer.dataset.index].read = "No";
+      myLibrary[bookContainer.dataset.index].read = "No";
       button.parentNode.previousSibling.textContent = "Read: No";
     });
   });
@@ -159,7 +163,7 @@ function attachButtons() {
   inProgressButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      myLibray[bookContainer.dataset.index].read = "In Progress";
+      myLibrary[bookContainer.dataset.index].read = "In Progress";
       button.parentNode.previousSibling.textContent = "Read: In Progress";
     });
   });
