@@ -91,13 +91,14 @@ const dialog = document.querySelector("dialog");
 const addBookButton = document.querySelector(".add-book");
 const confirmButton = document.querySelector(".confirm-button");
 const cancelButton = document.querySelector(".cancel-button");
+const form = document.querySelector("form");
 
 addBookButton.addEventListener("click", () => {
   dialog.showModal();
 });
 
 dialog.addEventListener("close", () => {
-  if (dialog.returnValue === "default") {
+  if (dialog.returnValue === "submit") {
     const newBookTitle = document.getElementById("title").value;
     const newBookAuthor = document.getElementById("author").value;
     const newBookPages = document.getElementById("pages").value;
@@ -114,17 +115,20 @@ dialog.addEventListener("close", () => {
     addNewBookToDOM(newBook, myLibrary.indexOf(newBook));
     attachButtons();
 
-    /* Add button event listeners */
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("pages").value = "";
+    document.getElementById("read").value = "No";
   }
 });
 
-confirmButton.addEventListener("click", (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-  dialog.close(confirmButton.value);
+  dialog.close("submit");
 });
 
 cancelButton.addEventListener("click", () => {
-  dialog.close();
+  dialog.close("cancel");
 });
 
 function attachButtons() {
@@ -132,7 +136,7 @@ function attachButtons() {
   deleteButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const bookContainer = button.parentNode.parentNode;
-      delete r[bookContainer.dataset.index];
+      delete [bookContainer.dataset.index];
       bookContainer.parentNode.removeChild(bookContainer);
     });
   });
